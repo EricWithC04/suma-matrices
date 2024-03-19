@@ -1,11 +1,11 @@
 const matrixForm = document.getElementById('matrixForm');
 const matrixXY = []
 
-const createRows = (num) => {
+const createRows = (arr) => {
     const rowContainer = document.getElementsByClassName('containerElements');
 
     for (let j = 0; j < rowContainer.length; j++) {
-        for (let i = 0; i < num; i++) {
+        for (let i = 0; i < arr.length; i++) {
             const newRow = document.createElement("div")
             newRow.classList.add("containerRow");
     
@@ -13,22 +13,31 @@ const createRows = (num) => {
         }
     }
 }
-const createElements = (num) => {
+const createElements = (numElements) => {
     const elementsContainer = document.getElementsByClassName('containerRow');
 
+    let secondMatrix = false
     for (let i = 0; i < elementsContainer.length; i++) {
-        for (let j = 0; j < num; j++) {
+        if (i === Math.ceil(elementsContainer.length / 2)) {
+            secondMatrix = true
+        }
+        for (let j = 0; j < numElements; j++) {
             const newElement = document.createElement("div")
             newElement.classList.add("element");
+            if (secondMatrix) {
+                newElement.textContent = matrixXY[i - Math.ceil(elementsContainer.length / 2)][j]
+            } else {
+                newElement.textContent = matrixXY[i][j]
+            }
             
             elementsContainer[i].appendChild(newElement)
         }
     }
 }
 
-const createMatrix = (rows, cols) => {
-    createRows(rows);
-    createElements(cols);
+const createMatrix = (arr) => {
+    createRows(arr);
+    createElements(arr.length);
 }
 
 matrixForm.addEventListener('submit', (e) => {
@@ -41,8 +50,7 @@ matrixForm.addEventListener('submit', (e) => {
     }
     console.log(matrixXY);
     createMatrix(
-        matrixForm.elements['rows'].value,
-        matrixForm.elements['cols'].value
+        matrixXY
     );
 })
 
