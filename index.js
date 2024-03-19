@@ -1,13 +1,15 @@
 const matrixForm = document.getElementById('matrixForm');
 
 const createRows = (num) => {
-    const rowContainer = document.getElementById('rContainer');
+    const rowContainer = document.getElementsByClassName('containerElements');
 
-    for (let i = 0; i < num; i++) {
-        const newRow = document.createElement("div")
-        newRow.classList.add("containerRow");
-
-        rowContainer.appendChild(newRow)
+    for (let j = 0; j < rowContainer.length; j++) {
+        for (let i = 0; i < num; i++) {
+            const newRow = document.createElement("div")
+            newRow.classList.add("containerRow");
+    
+            rowContainer[j].appendChild(newRow)
+        }
     }
 }
 const createElements = (num) => {
