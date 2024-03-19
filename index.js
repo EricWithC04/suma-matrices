@@ -1,6 +1,8 @@
+const matrixForm = document.getElementById('matrixForm');
+
 const createRows = (num) => {
     const rowContainer = document.getElementById('rContainer');
-    
+
     for (let i = 0; i < num; i++) {
         const newRow = document.createElement("div")
         newRow.classList.add("containerRow");
@@ -26,5 +28,11 @@ const createMatrix = (rows, cols) => {
     createElements(cols);
 }
 
-createMatrix(3, 3);
+matrixForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    createMatrix(
+        matrixForm.elements['rows'].value,
+        matrixForm.elements['cols'].value
+    );
+})
 
