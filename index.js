@@ -1,4 +1,7 @@
 const matrixForm = document.getElementById('matrixForm');
+const matrixCont = document.getElementById('matrixContainer');
+matrixCont.style.display = "none";
+
 const matrixXY = []
 const matrixXY2 = []
 
@@ -73,6 +76,8 @@ const createMatrix = (m1, m2) => {
 
 matrixForm.addEventListener('submit', (e) => {
     e.preventDefault()
+
+    matrixCont.style.display = "flex";
 
     for (let i = 0; i < matrixForm.elements['rows'].value; i++) {
         matrixXY.push([])

@@ -24,6 +24,7 @@ body {
 
 .matrixContainer {
     display: flex;
+    justify-content: space-around;
 }
 
 .containerRow {
@@ -44,7 +45,20 @@ body {
 }
 
 .element {
-    width: 120px;
-    height: 120px;
+    width: 60px;
+    height: 60px;
     outline: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addition {
+    display: flex;
+    align-items: center;
+}
+
+.addition button {
+    width: 45px;
+    height: 22px;
 }
