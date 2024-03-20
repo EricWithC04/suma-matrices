@@ -18,7 +18,7 @@ const createElements = (numElements) => {
 
     let secondMatrix = false
     for (let i = 0; i < elementsContainer.length; i++) {
-        if (i === Math.ceil(elementsContainer.length / 2)) {
+        if (i >= Math.ceil(elementsContainer.length / 2)) {
             secondMatrix = true
         }
         for (let j = 0; j < numElements; j++) {
@@ -29,9 +29,26 @@ const createElements = (numElements) => {
             } else {
                 newElement.textContent = matrixXY[i][j]
             }
+
+            newElement.addEventListener("click", () => {
+                const nuevoValor = prompt("Ingresa el valor deseado:");
+
+                if (nuevoValor !== null) {
+                    newElement.textContent = nuevoValor;
+
+                    if (secondMatrix) {
+                        matrixXY[i - Math.ceil(elementsContainer.length / 2)][j] = parseInt(nuevoValor)
+                    } else {
+                        matrixXY[i][j] = parseInt(nuevoValor)
+                    }
+                }
+
+                console.log(matrixXY);
+            });
             
             elementsContainer[i].appendChild(newElement)
         }
+        secondMatrix = false
     }
 }
 
