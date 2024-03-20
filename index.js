@@ -14,22 +14,16 @@ const createRows = (arr) => {
         }
     }
 }
-const createElements = (numElements) => {
+const createElements = (numElements, numElements2) => {
     const elementsContainer = document.getElementsByClassName('containerRow');
 
-    let secondMatrix = false
-    for (let i = 0; i < elementsContainer.length; i++) {
-        if (i >= Math.ceil(elementsContainer.length / 2)) {
-            secondMatrix = true
-        }
+    for (let i = 0; i < elementsContainer.length / 2; i++) {
+
         for (let j = 0; j < numElements; j++) {
             const newElement = document.createElement("div")
             newElement.classList.add("element");
-            if (secondMatrix) {
-                newElement.textContent = matrixXY[i - Math.ceil(elementsContainer.length / 2)][j]
-            } else {
-                newElement.textContent = matrixXY[i][j]
-            }
+
+            newElement.textContent = matrixXY[i][j]
 
             newElement.addEventListener("click", () => {
                 const nuevoValor = prompt("Ingresa el valor deseado:");
@@ -37,26 +31,44 @@ const createElements = (numElements) => {
                 if (nuevoValor !== null) {
                     newElement.textContent = nuevoValor;
 
-                    if (secondMatrix) {
-                        matrixXY[i - Math.ceil(elementsContainer.length / 2)][j] = parseInt(nuevoValor)
-                    } else {
-                        matrixXY[i][j] = parseInt(nuevoValor)
-                    }
+                    matrixXY[i][j] = parseInt(nuevoValor)
                 }
 
                 console.log(matrixXY);
-                console.log(matrixXY2);
             });
             
             elementsContainer[i].appendChild(newElement)
         }
-        secondMatrix = false
+    }
+
+    for (let i = 0; i < elementsContainer.length / 2; i++) {
+
+        for (let j = 0; j < numElements2; j++) {
+            const newElement = document.createElement("div")
+            newElement.classList.add("element");
+
+            newElement.textContent = matrixXY2[i][j]
+
+            newElement.addEventListener("click", () => {
+                const nuevoValor = prompt("Ingresa el valor deseado:");
+
+                if (nuevoValor !== null) {
+                    newElement.textContent = nuevoValor;
+
+                    matrixXY2[i][j] = parseInt(nuevoValor)
+                }
+
+                console.log(matrixXY2);
+            });
+            
+            elementsContainer[numElements2 + i].appendChild(newElement)
+        }
     }
 }
 
-const createMatrix = (arr) => {
-    createRows(arr);
-    createElements(arr.length);
+const createMatrix = (m1, m2) => {
+    createRows(m1);
+    createElements(m1.length, m2.length);
 }
 
 matrixForm.addEventListener('submit', (e) => {
@@ -65,13 +77,13 @@ matrixForm.addEventListener('submit', (e) => {
     for (let i = 0; i < matrixForm.elements['rows'].value; i++) {
         matrixXY.push([])
         matrixXY2.push([])
-        
+
         for (let j = 0; j < matrixForm.elements['cols'].value; j++) {
             matrixXY[i].push(1)
             matrixXY2[i].push(1)
         }
     }
 
-    createMatrix(matrixXY);
+    createMatrix(matrixXY, matrixXY2);
 })
 
