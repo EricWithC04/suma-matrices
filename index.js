@@ -106,9 +106,23 @@ obtainResult.addEventListener("click", async () => {
             matrix2: matrixXY2
         })
     })
+        .then(res => res.json())
+        .then(result => {
+            for (let i = 0; i < result.length; i++) {
+                const newRow = document.createElement("div")
+                newRow.classList.add("containerRow");
+        
+                containerResult.appendChild(newRow)
 
-    if (result.ok) {
-        result = result.json()
-        console.log(result);
-    }
+                for (let j = 0; j < result[i].length; j++) {
+                    const newElement = document.createElement("div")
+                    newElement.classList.add("element");
+
+                    newElement.textContent = result[i][j]
+                    newRow.appendChild(newElement)
+                }
+            }
+
+        })
+        .catch(err => console.error(err))
 })
