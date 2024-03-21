@@ -2,6 +2,9 @@ const matrixForm = document.getElementById('matrixForm');
 const matrixCont = document.getElementById('matrixContainer');
 matrixCont.style.display = "none";
 
+const obtainResult = document.getElementById("obtainResult");
+const containerResult = document.getElementById("containerResult");
+
 const matrixXY = []
 const matrixXY2 = []
 
@@ -92,3 +95,20 @@ matrixForm.addEventListener('submit', (e) => {
     createMatrix(matrixXY, matrixXY2);
 })
 
+obtainResult.addEventListener("click", async () => {
+    let result = await fetch("http://localhost:3000/matrixAddition", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            matrix1: matrixXY,
+            matrix2: matrixXY2
+        })
+    })
+
+    if (result.ok) {
+        result = result.json()
+        console.log(result);
+    }
+})
